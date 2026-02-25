@@ -166,7 +166,7 @@ ${iframeCodeCustom}`);
     // Create title and append to the header
     var titleElement = document.createElement("div");
     titleElement.className = "title";
-    titleElement.textContent = "Bash Playground";
+    titleElement.textContent = "JSAlpine";
     this.header_el.appendChild(titleElement);
 
     this.close_btn = document.createElement("span");

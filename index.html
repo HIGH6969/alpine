@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Bash Playground - Alpine Linux GNOME</title>
+
+<style>
+/* RESET */
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    font-family: sans-serif;
+}
+
+/* DESKTOP BACKGROUND */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #87a9c9;
+    position: relative;
+}
+
+/* ===== GNOME TOP BAR ===== */
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 36px;
+    background: rgba(25,25,25,0.75);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    z-index: 50;
+}
+
+/* ===== GNOME DOCK ===== */
+.dock {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 60px;
+    padding: 0 20px;
+    background: rgba(30,30,30,0.75);
+    backdrop-filter: blur(12px);
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    z-index: 50;
+}
+
+.dock-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: linear-gradient(145deg,#2c2c2c,#1a1a1a);
+    box-shadow: inset 0 2px 5px rgba(255,255,255,0.1),
+                0 5px 15px rgba(0,0,0,0.4);
+    transition: transform 0.2s ease;
+}
+
+.dock-icon:hover {
+    transform: scale(1.2);
+}
+
+/* ===== TERMINAL WRAPPER ===== */
+#term_wrap {
+    position: relative;
+    z-index: 100;
+}
+
+#term_container {
+    display: inline-block;
+}
+
+/* TERMINAL WINDOW */
+.term {
+    border: 1px solid #888;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+}
+
+/* TERMINAL HEADER */
+.term_header {
+    background-color: #ebe7e4;
+    padding: 4px 8px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    border-bottom: 1px solid #999;
+}
+
+/* FIX ICON SIZE (paste / file / delete) */
+.term_header img,
+.term_header .icon,
+.term_header label {
+    width: 16px !important;
+    height: 16px !important;
+}
+
+.term_header .close_btn {
+    width: 12px;
+    height: 12px;
+    background-color: #ff5f57;
+    border-radius: 50%;
+}
+
+/* TERMINAL CONTENT */
+.term_content_container {
+    font-family: monospace;
+    font-size: 15px;
+    color: #f0f0f0;
+    background: #000;
+}
+
+.term_content a {
+    color: #ffff00;
+}
+
+.term_cursor {
+    color: #000;
+    background: #00ff00;
+}
+
+/* SCROLLBAR */
+.term_scrollbar { 
+    background: transparent url(images/bg-scrollbar-track-y.png) no-repeat 0 0; 
+    float: right; 
+    width: 15px; 
+    height: 100%; 
+}
+
+.term_track { 
+    background: transparent url(images/bg-scrollbar-trackend-y.png) no-repeat 0 100%; 
+    height: 100%; 
+    width:13px; 
+    position: relative; 
+    padding: 0 1px; 
+}
+
+.term_thumb { 
+    background: transparent url(images/bg-scrollbar-thumb-y.png) no-repeat 50% 100%; 
+    height: 20px; 
+    width: 25px; 
+    cursor: pointer; 
+    position: absolute; 
+    top: 0; 
+    left: -5px; 
+}
+
+/* PROGRESS */
+#net_progress {
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* FILE INPUT HIDDEN */
+#files {
+    visibility: hidden;
+    width: 1px;
+    height: 1px;
+}
+/* TERMINAL HEADER */
+.term_header {
+    background-color: #ebe7e4;
+    padding: 4px 8px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    border-bottom: 1px solid #999;
+    justify-content: space-between; /* lejon që close_btn të shkojë djathtas */
+    position: relative;
+}
+
+/* CLOSE BUTTON - në qoshe të djathtë */
+.term_header .close_btn {
+    width: 12px;
+    height: 12px;
+    background-color: #ff5f57;
+    border-radius: 50%;
+    margin-left: auto; /* shtyn elementin totalisht djathtas */
+}
+</style>
+</head>
+
+<body>
+
+<div id="term_wrap">
+    <div id="term_container"></div>
+    <progress id="net_progress"></progress>
+</div>
+
+
+<script src="term.js"></script>
+<script src="jslinux.js"></script>
+
+</body>
+</html>
